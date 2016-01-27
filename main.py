@@ -21,7 +21,10 @@ def forbidden(e):
     
 @app.route('/<term>')
 def page(term):
-    w = wikipedia.page(term)
+    try:
+        w = wikipedia.page(term)
+    except wikipedia.exceptions.DisambiguationError:
+        return render_template('pretty.html',result='Disambiguaton Error')
     ref =w.references
     gbooks = [x for x in ref if 'books.google' in x]
     processed = [process_gbooks(y) for y in gbooks]
