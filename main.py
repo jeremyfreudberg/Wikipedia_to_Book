@@ -29,6 +29,8 @@ def page(term):
         w = wikipedia.page(term)
     except wikipedia.exceptions.DisambiguationError:
         return render_template('pretty.html',result='Disambiguaton Error')
+    except wikipedia.exceptions.PageError:
+        return render_template('pretty.html',result='Article not found')
     ref =w.references
     gbooks = [x for x in ref if 'books.google' in x]
     processed = [process_gbooks(y) for y in gbooks]
