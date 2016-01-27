@@ -18,6 +18,10 @@ def internal(e):
 @app.errorhandler(403)
 def forbidden(e):
     return render_template('error.html',num=403),403
+
+@app.route('/')
+def index():
+    return render_template('pretty.html',result='Append the title of a Wikipedia article to this URL')
     
 @app.route('/<term>')
 def page(term):
@@ -35,5 +39,5 @@ def page(term):
     return render_template('pretty.html',result=result)
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
         
