@@ -21,8 +21,7 @@ def forbidden(e):
 
 @app.route('/')
 def index():
-    #result = 'Append the title of a Wikipedia article to this URL\nNeed an example? Try <a href="/Potato">Potato</a>
-    result = []
+    result = ''
     return render_template('pretty.html',result=result)
     
 @app.route('/<term>')
