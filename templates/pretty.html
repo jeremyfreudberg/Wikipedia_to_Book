@@ -1,25 +1,20 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Wikipedia to Books{% endblock %}
+{% macro printbook(title, author, isbn13) %}
+<ul>{{ title }} - {{ author }} - {{ isbn13 }}</ul>
+{% endmacro %}
+{% block title %}Wikipedia to Book{% endblock %}
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-<div class = 'container'>
-    <div class = 'navbar-header'>
-        <!--<button type='button' class='navbar-toggle'
-        data-toggle = 'collapse' data-target = '.navbar-collapse'>
-            <span class='sr-only'>Toggle Navigation</span>
-            <span class="icon-bar"</span>
-            <span class="icon-bar"</span>
-            <span class="icon-bar"</span>            
-            </button>-->
-        <a class='navbar-brand' href='#'>Home</a>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Wikipedia to Book</a>
     </div>
-    <!--<div class='navbar-collapse collapse'>
-        <ul class='nav navbar-nav'>
-            <li><a href='#'>Help</a></li>
-        </ul>
-    </div>-->
-</div>
-</div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -28,10 +23,13 @@
 	<h1>Wikipedia to Book</h1><br>
         {% block page_content %}
 		{% if result|length == 0 %}
-		<h4>Append the title of a Wikipedia article to this URL (form coming soon).<br>
-		Need a good example? Not all articles are created equal. Try <a href="/Potato">Potato</a>.</h4>
+		<h4>{{ msg }}</h4>
 		{% else %}
-		<h4>{{ result }}</h4>
+		<h4>
+		{% for book in result %}
+		{{ printbook(book[0], book[1], book[2]) }}
+		{% endfor %}
+		</h4>
 		{% endif %}
 		{% endblock %}
     </div>
