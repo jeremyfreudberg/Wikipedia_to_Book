@@ -35,6 +35,10 @@ def page(term):
     ref =w.references
     gbooks = [x for x in ref if 'books.google' in x]
     processed = [process_gbooks(y) for y in gbooks]
+    while ('Timeout',) in processed:
+        processed.remove(('Timeout',))
+    while ('No title found', 'No author found', 'No ISBN found') in processed:
+        processed.remove(('No title found', 'No author found', 'No ISBN found'))
     if len(processed) > 0:
         result = str(processed)
     else:
