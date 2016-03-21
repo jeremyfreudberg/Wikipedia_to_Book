@@ -1,3 +1,7 @@
+# Cached Cython (__pycache__)
+*.pyc
+__pycache__/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
